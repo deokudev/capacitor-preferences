@@ -16,6 +16,14 @@ on Android. Stored data is cleared if the app is uninstalled.
 stores a lot of data, has high read/write load, or requires complex querying,
 we recommend taking a look at a SQLite-based solution. One such solution is [Ionic Secure Storage](https://ionic.io/docs/secure-storage), a SQLite-based engine with full encryption support. The [Capacitor Community](https://github.com/capacitor-community/) has also built a number of other storage engines.
 
+## Important
+
+기존 Preferences 라이브러리에서 swift 측 구현부에서, UserDefaults.standard에서 참조하므로 
+UserDefaults(suiteName) 에서 참조함으로써, App와 Widget 사이의 UserDefaults 값이 공유되도록 허용함
+suiteName값은 "group.SharedCapacitorStorage"이 기본값
+XCode 상에서, "App"과 "Widget"에서 Capability 추가 버튼을 통해 "Add Group" 기능에 "group.SharedCapacitorStorage"을 추가해주어야 함
+
+
 ## Install
 
 ```bash

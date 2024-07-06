@@ -8,7 +8,19 @@ public struct PreferencesConfiguration {
     let group: Group
 
     public init(for group: Group = .appGroup("group.SharedCapacitorStorage")) {
-        self.group = group
+        switch group {
+        case .appGroup(let groupIdentifier):
+            if groupIdentifier.isEmpty {
+                self.group = .named("CapacitorStorage")
+            } else if UserDefaults(suiteName: groupIdentifier) == nil {
+                self.group = .named("CapacitorStorage")
+                print("Invalid app group identifier: \(groupIdentifier). Falling back to named: CapacitorStorage")
+            } else {
+                self.group = group
+            }
+        default:
+            self.group = group
+        }
     }
 }
 
@@ -34,7 +46,7 @@ public class Preferences {
         case let .named(group):
             return group + "."
         case .appGroup:
-            return ""
+            return "CapacitorStorage."
         }
     }
 
