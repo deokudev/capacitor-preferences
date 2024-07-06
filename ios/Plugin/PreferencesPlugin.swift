@@ -12,6 +12,8 @@ public class PreferencesPlugin: CAPPlugin {
         if let group = group {
             if group == "NativeStorage" {
                 configuration = PreferencesConfiguration(for: .cordovaNativeStorage)
+            } else if group.starts(with: "group.") {
+                configuration = PreferencesConfiguration(for: .appGroup(group))
             } else {
                 configuration = PreferencesConfiguration(for: .named(group))
             }

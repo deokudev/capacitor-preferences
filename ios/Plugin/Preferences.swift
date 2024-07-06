@@ -2,12 +2,12 @@ import Foundation
 
 public struct PreferencesConfiguration {
     public enum Group {
-        case named(String), cordovaNativeStorage
+        case named(String), cordovaNativeStorage, appGroup(String)
     }
 
     let group: Group
 
-    public init(for group: Group = .named("CapacitorStorage")) {
+    public init(for group: Group = .appGroup("group.SharedCapacitorStorage")) {
         self.group = group
     }
 }
@@ -16,7 +16,15 @@ public class Preferences {
     private let configuration: PreferencesConfiguration
 
     private var defaults: UserDefaults {
-        return UserDefaults.standard
+        switch configuration.group {
+        case .cordovaNativeStorage, .named:
+            return UserDefaults.standard
+        case let .appGroup(groupIdentifier):
+            guard let defaults = UserDefaults(suiteName: groupIdentifier) else {
+                fatalError("Unable to access UserDefaults with app group: \(groupIdentifier)")
+            }
+            return defaults
+        }
     }
 
     private var prefix: String {
@@ -25,6 +33,8 @@ public class Preferences {
             return ""
         case let .named(group):
             return group + "."
+        case .appGroup:
+            return ""
         }
     }
 
@@ -32,7 +42,7 @@ public class Preferences {
         return defaults.dictionaryRepresentation().keys.filter { $0.hasPrefix(prefix) }
     }
 
-    public init(with configuration: PreferencesConfiguration) {
+    public init(with configuration: PreferencesConfiguration = PreferencesConfiguration()) {
         self.configuration = configuration
     }
 
