@@ -1,11 +1,14 @@
-# @capacitor/preferences
+# 중요 수정 사항
 
-## 중요 수정 사항
-
-기존 Preferences 라이브러리에서 swift 측 구현부에서, UserDefaults.standard에서 참조하므로 
+기존 Preferences 라이브러리에서 swift 측 구현부에서, UserDefaults.standard만 참조하므로
 UserDefaults(suiteName) 에서 참조함으로써, App와 Widget 사이의 UserDefaults 값이 공유되도록 허용함
 suiteName값은 "group.SharedCapacitorStorage"이 기본값
-XCode 상에서, "App"과 "Widget"에서 Capability 추가 버튼을 통해 "Add Group" 기능에 "group.SharedCapacitorStorage"을 추가해주어야 함
+
+# 추가 Action 필요
+
+XCode 상에서, "App"과 "Widget"(있을 경우)에서 "Capability 추가" 버튼을 통해 "Add Group" 기능을 통해, "group.SharedCapacitorStorage"을 추가해주어야 함
+
+# @capacitor/preferences
 
 The Preferences API provides a simple key/value persistent store for lightweight data.
 
@@ -63,15 +66,15 @@ This method can also be used to store non-string values, such as numbers and boo
 
 <docgen-index>
 
-* [`configure(...)`](#configure)
-* [`get(...)`](#get)
-* [`set(...)`](#set)
-* [`remove(...)`](#remove)
-* [`clear()`](#clear)
-* [`keys()`](#keys)
-* [`migrate()`](#migrate)
-* [`removeOld()`](#removeold)
-* [Interfaces](#interfaces)
+- [`configure(...)`](#configure)
+- [`get(...)`](#get)
+- [`set(...)`](#set)
+- [`remove(...)`](#remove)
+- [`clear()`](#clear)
+- [`keys()`](#keys)
+- [`migrate()`](#migrate)
+- [`removeOld()`](#removeold)
+- [Interfaces](#interfaces)
 
 </docgen-index>
 
@@ -94,8 +97,7 @@ Options that are `undefined` will not be used.
 
 **Since:** 1.0.0
 
---------------------
-
+---
 
 ### get(...)
 
@@ -113,8 +115,7 @@ Get the value from preferences of a given key.
 
 **Since:** 1.0.0
 
---------------------
-
+---
 
 ### set(...)
 
@@ -130,8 +131,7 @@ Set the value in preferences for a given key.
 
 **Since:** 1.0.0
 
---------------------
-
+---
 
 ### remove(...)
 
@@ -147,8 +147,7 @@ Remove the value from preferences for a given key, if any.
 
 **Since:** 1.0.0
 
---------------------
-
+---
 
 ### clear()
 
@@ -160,8 +159,7 @@ Clear keys and values from preferences.
 
 **Since:** 1.0.0
 
---------------------
-
+---
 
 ### keys()
 
@@ -175,8 +173,7 @@ Return the list of known keys in preferences.
 
 **Since:** 1.0.0
 
---------------------
-
+---
 
 ### migrate()
 
@@ -194,8 +191,7 @@ To remove the old data after being migrated, call removeOld().
 
 **Since:** 1.0.0
 
---------------------
-
+---
 
 ### removeOld()
 
@@ -207,11 +203,9 @@ Removes old data with `_cap_` prefix from the Capacitor 2 Storage plugin.
 
 **Since:** 1.1.0
 
---------------------
-
+---
 
 ### Interfaces
-
 
 #### ConfigureOptions
 
@@ -219,20 +213,17 @@ Removes old data with `_cap_` prefix from the Capacitor 2 Storage plugin.
 | ----------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ----- |
 | **`group`** | <code>string</code> | Set the preferences group. Preferences groups are used to organize key/value pairs. Using the value 'NativeStorage' provides backwards-compatibility with [`cordova-plugin-nativestorage`](https://www.npmjs.com/package/cordova-plugin-nativestorage). WARNING: The `clear()` method can delete unintended values when using the 'NativeStorage' group. | <code>CapacitorStorage</code> | 1.0.0 |
 
-
 #### GetResult
 
 | Prop        | Type                        | Description                                                                                                                       | Since |
 | ----------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----- |
 | **`value`** | <code>string \| null</code> | The value from preferences associated with the given key. If a value was not previously set or was removed, value will be `null`. | 1.0.0 |
 
-
 #### GetOptions
 
 | Prop      | Type                | Description                                       | Since |
 | --------- | ------------------- | ------------------------------------------------- | ----- |
 | **`key`** | <code>string</code> | The key whose value to retrieve from preferences. | 1.0.0 |
-
 
 #### SetOptions
 
@@ -241,20 +232,17 @@ Removes old data with `_cap_` prefix from the Capacitor 2 Storage plugin.
 | **`key`**   | <code>string</code> | The key to associate with the value being set in preferences. | 1.0.0 |
 | **`value`** | <code>string</code> | The value to set in preferences with the associated key.      | 1.0.0 |
 
-
 #### RemoveOptions
 
 | Prop      | Type                | Description                                     | Since |
 | --------- | ------------------- | ----------------------------------------------- | ----- |
 | **`key`** | <code>string</code> | The key whose value to remove from preferences. | 1.0.0 |
 
-
 #### KeysResult
 
 | Prop       | Type                  | Description                    | Since |
 | ---------- | --------------------- | ------------------------------ | ----- |
 | **`keys`** | <code>string[]</code> | The known keys in preferences. | 1.0.0 |
-
 
 #### MigrateResult
 
