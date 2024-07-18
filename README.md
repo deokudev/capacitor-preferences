@@ -1,10 +1,10 @@
-# 중요 수정 사항
+**수정사항**
 
 기존 Preferences 라이브러리에서 swift 측 구현부에서, UserDefaults.standard만 참조하므로
 UserDefaults(suiteName) 에서 참조함으로써, App와 Widget 사이의 UserDefaults 값이 공유되도록 허용함
 suiteName값은 "group.SharedCapacitorStorage"이 기본값
 
-# 추가 Action 필요
+**중요**
 
 XCode 상에서, "App"과 "Widget"(있을 경우)에서 "Capability 추가" 버튼을 통해 "Add Group" 기능을 통해, "group.SharedCapacitorStorage"을 추가해주어야 함
 
